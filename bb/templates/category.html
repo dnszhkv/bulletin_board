@@ -1,0 +1,7 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+    <h2>Объявлений в данном разделе: {{paginator.count}}</h2>
+    <hr>
+    {% include "content.html" %}
+{% endblock content %}

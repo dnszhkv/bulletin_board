@@ -1,0 +1,50 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+    <h2>Страница авторизованного пользователя {{request.user.username}}</h2>
+    <div> "Персональная информация пользователя {{request.user.username}}" </div>
+
+    <button> <a href="accounts/logout/">Выйти</a> </button>
+
+    {% if replies %}
+        <hr>
+        <h4>Отклики к Вашим Объявлениям:</h4>
+        <form method="get" action="">
+            <select name="post_title" id="post_title">
+                <option value="" selected>Все посты</option>
+                {% for post_title in post_titles %}
+                    <option value="{{ post_title }}">{{ post_title }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Применить фильтр</button>
+        </form>
+        <br>
+        <ul>
+            {% for reply in replies|dictsortreversed:"time_in" %}
+                <li>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <p style="text-align: left;" class="details">
+                            Объявление: "{{reply.post.title}}";
+                            От пользователя: <span class="author">{{reply.user}}</span>;
+                            Дата и время: {{reply.time_in}}.
+                        </p>
+                        <form method="post" style="margin: 0;" class="buttons">
+                            {% csrf_token %}
+                            <input type="hidden" name="reply_id" value="{{ reply.id }}">
+                            <button type="submit" name="action" value="accept" class="button-xsmall pure-botton button-wrning">
+                                <i class="bi bi-bookmark-plus"></i>
+                                Принять
+                            </button>
+                            <button type="submit" name="action" value="delete" class="button-xsmall pure-botton button-wrning">
+                                <i class="bi bi-bookmark-plus"></i>
+                                Удалить
+                            </button>
+                        </form>
+                    </div>
+                    <p style="text-align: left;">{{reply.text}}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

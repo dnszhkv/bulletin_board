@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% load account %}
+    <h3>Спасибо за регистрацию, {{user.username}}!</h3>
+    <p>Пожалуйста, перейдите по <a href="{{ activate_url }}">ссылке</a> для активации вашего аккаунта.</p>
+</body>
+</html>

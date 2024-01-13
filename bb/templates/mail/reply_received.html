@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% load account %}
+    <h3>Здравствуйте, <strong>{{reviewer}}</strong>!</h3>
+    <p>
+        Пользователь <strong>{{post_author}}</strong> принял ваш отклик к посту "{{post_title}}".
+    </p>
+</body>
+</html>

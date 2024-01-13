@@ -1,0 +1,54 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+<!-- В контенте на странице вывожу сам пост, идентификатор которого был передан в url -->
+{% block content %}
+    <h1>{{ post.title }}</h1>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p style="margin: 0;" class="details">
+            Автор: <span class="author">{{post.author}}</span>;
+            дата публикации: <span class="date">{{post.time_in|date:'d.m.Y'}}</span>;
+            категории:
+            {% for c in post.category.values %}
+            <a href="{% url 'category' c.id %}" class="category">{{c.name}}</a>
+            {% endfor %}
+        </p>
+
+        {% if request.user.is_authenticated and request.user == post.author.user %}
+            <p style="margin: 0;" class="buttons">
+                <a href="{% url 'edit' pk=post.pk %}">
+                    <button class="button-xsmall pure-botton button-wrning">
+                        <i class="bi bi-bookmark-plus"></i>
+                        Редактировать
+                    </button>
+                </a>
+                <a href="{% url 'delete' post.pk %}">
+                    <button class="button-xsmall pure-botton button-wrning">
+                        <i class="bi bi-bookmark-plus"></i>
+                        Удалить
+                    </button>
+                </a>
+            </p>
+        {% elif request.user.is_authenticated %}
+            <p style="margin: 0;" class="buttons">
+                <a href="{% url 'reply' post.pk %}">
+                    <button class="button-xsmall pure-botton button-wrning">
+                        <i class="bi bi-chat-dots"></i>
+                        Оставить отклик
+                    </button>
+                </a>
+            </p>
+        {% endif %}
+    </div>
+
+    <hr>
+    {% if post %}
+        <div style="text-align: left;">{{ post.text|safe }}</div>
+    {% endif %}
+    <hr>
+
+{% endblock content %}

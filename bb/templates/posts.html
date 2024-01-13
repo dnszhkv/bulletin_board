@@ -1,0 +1,15 @@
+<!--  Наследуюсь от шаблона default.html, который создаю для flatpages -->
+{% extends 'flatpages/default.html' %}
+
+<!-- Название будет Posts -->
+{% block title %}
+Posts
+{% endblock title %}
+
+<!-- В контенте на странице вывожу все посты -->
+{% block content %}
+    <h1>Все объявления</h1>
+    <h4>Общее количество: {{paginator.count}}</h4>
+    <hr>
+    {% include "content.html" %}
+{% endblock content %}

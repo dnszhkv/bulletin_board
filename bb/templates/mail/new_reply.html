@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% load account %}
+    <h3>Здравствуйте, <strong>{{author}}</strong>!</h3>
+    <p>
+        На ваше объявление "{{post_title}}" был оставлен отклик.
+        Перейдите на <a href="http://127.0.0.1:8000">страницу своего профиля</a> для просмотра.
+    </p>
+</body>
+</html>

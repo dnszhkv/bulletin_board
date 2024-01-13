@@ -1,0 +1,21 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+    <h1>Объявление</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type="submit" value="Сохранить" />
+    </form>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            ClassicEditor.create(document.querySelector('.django_ckeditor_5'), {
+                toolbar: {{ CKEDITOR_5_CONFIGS.default.toolbar|safe }},
+            });
+        });
+    </script>
+{% endblock %}
